@@ -1,0 +1,39 @@
+version: '3'
+
+services:
+  postgresdb:
+    build: ./postgres
+    container_name: postgresdb
+    restart: always
+    tty: true
+    ports:
+      - 5432:5432
+    volumes:
+      - ${PWD}/.env:/app/.env
+      - ./postgres/data:/var/lib/postgresql/data
+    environment:
+      - POSTGRES_HOST_AUTH_METHOD=trust
+      - POSTGRES_DB=${POSTGRES_DB}
+      - POSTGRES_USER=${POSTGRES_USER}
+      - POSTGRES_PASSWORD=${POSTGRES_PASSWORD}
+    networks:
+      - eabank_network
+
+  pgadmin:
+    image: dpage/pgadmin4
+    container_name: pgadmin
+    ports:
+      - "80:80"
+    volumes:
+      - ${PWD}/.env:/app/.env
+    depends_on:
+      - postgresdb
+    environment:
+      - PGADMIN_DEFAULT_EMAIL=admin@admin.com
+      - PGADMIN_DEFAULT_PASSWORD=eabankpsw
+    networks:
+      - eabank_network
+
+networks:
+  eabank_network:
+    driver: bridge
