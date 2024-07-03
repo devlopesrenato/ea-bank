@@ -26,3 +26,11 @@ model Account {
   type           String
   openingBalance Float
 }
+
+model Payment {
+  id          Int      @id @default(autoincrement())
+  accountId   Int
+  value       Float
+  date        DateTime
+  description String
+}
