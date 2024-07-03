@@ -1,9 +1,19 @@
-import { Controller, Get, Post, Body, Param, Query } from '@nestjs/common';
+import {
+  Controller,
+  Get,
+  Post,
+  Body,
+  Param,
+  Query,
+  UseGuards,
+} from '@nestjs/common';
 import { PaymentService } from './payment.service';
 import { CreatePaymentDto } from './dto/create-payment.dto';
 import { FiltersPaymentDto } from './dto/filters-payment.dto';
+import { AuthGuard } from '@nestjs/passport';
 
 @Controller('payment')
+@UseGuards(AuthGuard('jwt'))
 export class PaymentController {
   constructor(private readonly paymentService: PaymentService) {}
 
