@@ -7,6 +7,7 @@ import { AccountService } from '../account/account.service';
 import { ReportRepository } from './report.repository';
 import { PaymentRepository } from '../payment/payment.repository';
 import { AccountRepository } from '../account/account.repository';
+import { UploadService } from 'src/upload/upload.service';
 
 @Module({
   controllers: [ReportController],
@@ -18,6 +19,7 @@ import { AccountRepository } from '../account/account.repository';
     PaymentRepository,
     AccountService,
     AccountRepository,
+    UploadService,
   ],
 })
 export class ReportModule {}
