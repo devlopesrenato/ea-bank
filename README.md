@@ -1,73 +1,99 @@
-<p align="center">
-  <a href="http://nestjs.com/" target="blank"><img src="https://nestjs.com/img/logo-small.svg" width="200" alt="Nest Logo" /></a>
-</p>
+## Descrição
 
-[circleci-image]: https://img.shields.io/circleci/build/github/nestjs/nest/master?token=abc123def456
-[circleci-url]: https://circleci.com/gh/nestjs/nest
+Este projeto consiste em uma API RESTful desenvolvida utilizando o framework NestJS para gerenciar contas bancárias, pagamentos e relatórios de transações, além de implementar funcionalidades de autenticação baseada em JWT e upload de imagens para Amazon S3.
 
-  <p align="center">A progressive <a href="http://nodejs.org" target="_blank">Node.js</a> framework for building efficient and scalable server-side applications.</p>
-    <p align="center">
-<a href="https://www.npmjs.com/~nestjscore" target="_blank"><img src="https://img.shields.io/npm/v/@nestjs/core.svg" alt="NPM Version" /></a>
-<a href="https://www.npmjs.com/~nestjscore" target="_blank"><img src="https://img.shields.io/npm/l/@nestjs/core.svg" alt="Package License" /></a>
-<a href="https://www.npmjs.com/~nestjscore" target="_blank"><img src="https://img.shields.io/npm/dm/@nestjs/common.svg" alt="NPM Downloads" /></a>
-<a href="https://circleci.com/gh/nestjs/nest" target="_blank"><img src="https://img.shields.io/circleci/build/github/nestjs/nest/master" alt="CircleCI" /></a>
-<a href="https://coveralls.io/github/nestjs/nest?branch=master" target="_blank"><img src="https://coveralls.io/repos/github/nestjs/nest/badge.svg?branch=master#9" alt="Coverage" /></a>
-<a href="https://discord.gg/G7Qnnhy" target="_blank"><img src="https://img.shields.io/badge/discord-online-brightgreen.svg" alt="Discord"/></a>
-<a href="https://opencollective.com/nest#backer" target="_blank"><img src="https://opencollective.com/nest/backers/badge.svg" alt="Backers on Open Collective" /></a>
-<a href="https://opencollective.com/nest#sponsor" target="_blank"><img src="https://opencollective.com/nest/sponsors/badge.svg" alt="Sponsors on Open Collective" /></a>
-  <a href="https://paypal.me/kamilmysliwiec" target="_blank"><img src="https://img.shields.io/badge/Donate-PayPal-ff3f59.svg"/></a>
-    <a href="https://opencollective.com/nest#sponsor"  target="_blank"><img src="https://img.shields.io/badge/Support%20us-Open%20Collective-41B883.svg" alt="Support us"></a>
-  <a href="https://twitter.com/nestframework" target="_blank"><img src="https://img.shields.io/twitter/follow/nestframework.svg?style=social&label=Follow"></a>
-</p>
-  <!--[![Backers on Open Collective](https://opencollective.com/nest/backers/badge.svg)](https://opencollective.com/nest#backer)
-  [![Sponsors on Open Collective](https://opencollective.com/nest/sponsors/badge.svg)](https://opencollective.com/nest#sponsor)-->
+## Insalação e configuração do projeto
 
-## Description
+## Pré-requisitos
 
-[Nest](https://github.com/nestjs/nest) framework TypeScript starter repository.
+- Docker instalado na máquina local.
+- Docker Compose instalado na máquina local.
 
-## Installation
+## 1. Configuração do arquivo `.env`
+
+- Crie o arquivo .env na raiz do projeto as seguintes informações:
+
+```properties
+DATABASE_URL="postgresql://postgres:myP$W@localhost:5432/eabankdb?schema=public"
+
+POSTGRES_DB=eabankdb
+POSTGRES_USER=postgres
+POSTGRES_PASSWORD=eabankP$W
+```
+
+- Estas variáveis serão utilizadas pelo Docker Compose para configurar o banco de dados.
+
+## 2. Suba o banco de dados PostgreSQL como Docker Compose
+
+- Execute o seguinte comando para construir e iniciar os serviços definidos no docker-compose.yml:
+
+```bash
+$ docker-compose up -d --build
+```
+
+- verifique se os container subiram corretamente:
+
+```bash
+$ docker-compose ps
+```
+
+- Você deverá ver algo semelhante a isso:
+
+```bash
+   Name              Command                State           Ports
+--------------------------------------------------------------------
+pgadmin       /entrypoint.sh                  Up       0.0.0.0:80->80/tcp
+postgresdb    docker-entrypoint.sh postgres   Up       0.0.0.0:5432->5432/tcp
+```
+
+## Acessar o pgAdmin
+
+- Se necessário, você pode acessar o pgAdmin para gerenciar o banco de dados PostgreSQL. Abra um navegador e vá para http://localhost:80.
+
+- Use as credenciais configuradas no docker-compose.yml (PGADMIN_DEFAULT_EMAIL e PGADMIN_DEFAULT_PASSWORD).
+
+## Variáveis do Amazon S3
+
+- Adicione ao final do arquivo .env as seguinte variáveis para conexão do modulo de upload de arquivos
+
+```properties
+AWS_S3_REGION=us-east-2
+AWS_ACCESS_KEY_ID=AAAABBBBCCCCDDDDEEEE
+AWS_SECRET_ACCESS_KEY=abcdefghij1234567890abcdefghij123/456789
+```
+
+## Instalação
 
 ```bash
 $ npm install
 ```
 
-## Running the app
+## Aplicando as migrações do banco de dados:
 
 ```bash
-# development
+# Ambiente de desenvolvimento
+$ npx prisma migrate dev
+
+# Ambiente de produção
+$ npx prisma migrate deploy
+```
+
+## Iniciando o App
+
+```bash
+# desenvolvimento
 $ npm run start
 
-# watch mode
+# desenvolvimento com modo de observação (watch mode)
 $ npm run start:dev
 
-# production mode
+# v
 $ npm run start:prod
 ```
 
-## Test
+## Testes
 
 ```bash
-# unit tests
+# testes unitários
 $ npm run test
-
-# e2e tests
-$ npm run test:e2e
-
-# test coverage
-$ npm run test:cov
 ```
-
-## Support
-
-Nest is an MIT-licensed open source project. It can grow thanks to the sponsors and support by the amazing backers. If you'd like to join them, please [read more here](https://docs.nestjs.com/support).
-
-## Stay in touch
-
-- Author - [Kamil Myśliwiec](https://kamilmysliwiec.com)
-- Website - [https://nestjs.com](https://nestjs.com/)
-- Twitter - [@nestframework](https://twitter.com/nestframework)
-
-## License
-
-Nest is [MIT licensed](LICENSE).
