@@ -1,4 +1,5 @@
 import { Test } from '@nestjs/testing';
+import { ConfigService } from '@nestjs/config';
 import {
   BadRequestException,
   ConflictException,
@@ -10,6 +11,7 @@ import { PaymentRepository } from '../payment.repository';
 import { MockPaymentRepository } from './mocks/mock.payment.repository';
 import { AccountRepository } from '../../account/account.repository';
 import { MockAccountRepository } from '../../account/test/mocks/mock.account.repository';
+import { UploadService } from '../../upload/upload.service';
 
 describe('PaymentService', () => {
   let controller: PaymentController;
@@ -39,6 +41,8 @@ describe('PaymentService', () => {
       controllers: [PaymentController],
       providers: [
         PaymentService,
+        UploadService,
+        ConfigService,
         {
           provide: PaymentRepository,
           useClass: MockPaymentRepository,

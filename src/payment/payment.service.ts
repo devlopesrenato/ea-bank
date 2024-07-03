@@ -8,7 +8,7 @@ import { CreatePaymentDto } from './dto/create-payment.dto';
 import { PaymentRepository } from './payment.repository';
 import { AccountRepository } from '../account/account.repository';
 import { FiltersPaymentDto } from './dto/filters-payment.dto';
-import { UploadService } from 'src/upload/upload.service';
+import { UploadService } from '../upload/upload.service';
 
 @Injectable()
 export class PaymentService {
