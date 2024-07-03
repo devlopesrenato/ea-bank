@@ -21,15 +21,17 @@ model User {
 }
 
 model Account {
-  id             Int    @id @default(autoincrement())
-  name           String @unique
+  id             Int       @id @default(autoincrement())
+  name           String    @unique
   type           String
   openingBalance Float
+  payments       Payment[]
 }
 
 model Payment {
   id          Int      @id @default(autoincrement())
   accountId   Int
+  account     Account  @relation(fields: [accountId], references: [id], onDelete: Cascade)
   value       Float
   date        DateTime
   description String
