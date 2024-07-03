@@ -11,7 +11,7 @@ import { ReportRepository } from '../report.repository';
 import { MockReportRepository } from './mocks/mock.report.repository';
 import { BadRequestException, NotFoundException } from '@nestjs/common';
 
-describe.only('ReportService', () => {
+describe('ReportService', () => {
   let controller: ReportController;
   let service: ReportService;
   let repository: ReportRepository;
@@ -122,7 +122,7 @@ describe.only('ReportService', () => {
     }
   });
 
-  it.only('should return accountId not found error', async () => {
+  it('should return accountId not found error', async () => {
     try {
       await controller.accountStatement({
         accountId: 101,
