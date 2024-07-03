@@ -1,4 +1,5 @@
 import { Test, TestingModule } from '@nestjs/testing';
+import { ConfigService } from '@nestjs/config';
 import { ReportService } from '../report.service';
 import { AccountService } from '../../account/account.service';
 import { PaymentService } from '../../payment/payment.service';
@@ -10,6 +11,7 @@ import { ReportController } from '../report.controller';
 import { ReportRepository } from '../report.repository';
 import { MockReportRepository } from './mocks/mock.report.repository';
 import { BadRequestException, NotFoundException } from '@nestjs/common';
+import { UploadService } from '../../upload/upload.service';
 
 describe('ReportService', () => {
   let controller: ReportController;
@@ -29,6 +31,8 @@ describe('ReportService', () => {
       controllers: [ReportController],
       providers: [
         ReportService,
+        UploadService,
+        ConfigService,
         {
           provide: ReportRepository,
           useClass: MockReportRepository,

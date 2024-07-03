@@ -8,12 +8,14 @@ import { CreatePaymentDto } from './dto/create-payment.dto';
 import { PaymentRepository } from './payment.repository';
 import { AccountRepository } from '../account/account.repository';
 import { FiltersPaymentDto } from './dto/filters-payment.dto';
+import { UploadService } from '../upload/upload.service';
 
 @Injectable()
 export class PaymentService {
   constructor(
     private repository: PaymentRepository,
     private accountRepository: AccountRepository,
+    private uploadService: UploadService,
   ) {}
 
   async create(createPaymentDto: CreatePaymentDto) {
@@ -43,6 +45,20 @@ export class PaymentService {
     }
 
     return this.repository.create(createPaymentDto);
+  }
+
+  async savePaymentVoucher(file: Buffer, paymentId: number) {
+    const payment = await this.repository.getOneByID(paymentId);
+    if (!payment) {
+      throw new NotFoundException('Transação não encontrada');
+    }
+    const fileName = `${payment.accountId}-${Date.now()}.jpeg`;
+    const result = await this.uploadService.uploadFileAmazonS3(fileName, file);
+    const paymentVoucher = await this.repository.savePaymentVoucherUrl(
+      paymentId,
+      result.url,
+    );
+    return paymentVoucher;
   }
 
   async findAll(filtersPaymentDto: FiltersPaymentDto) {

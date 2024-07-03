@@ -29,10 +29,19 @@ model Account {
 }
 
 model Payment {
-  id          Int      @id @default(autoincrement())
-  accountId   Int
-  account     Account  @relation(fields: [accountId], references: [id], onDelete: Cascade)
-  value       Float
-  date        DateTime
-  description String
+  id              Int              @id @default(autoincrement())
+  accountId       Int
+  account         Account          @relation(fields: [accountId], references: [id], onDelete: Cascade)
+  value           Float
+  date            DateTime
+  description     String
+  paymentVouchers PaymentVoucher[]
+}
+
+model PaymentVoucher {
+  id        Int    @id @default(autoincrement())
+  paymentId Int
+  url       String
+
+  payment Payment @relation(fields: [paymentId], references: [id], onDelete: Cascade)
 }
