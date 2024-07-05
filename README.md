@@ -61,6 +61,7 @@ AWS_S3_REGION=us-east-2
 AWS_ACCESS_KEY_ID=AAAABBBBCCCCDDDDEEEE
 AWS_SECRET_ACCESS_KEY=abcdefghij1234567890abcdefghij123/456789
 ```
+- Criar um ```bucket``` no S3 com o nome ```ea-bank-payment-voucher``` (desabilitar o bloqueio do acesso público)
 
 ## Instalação
 
