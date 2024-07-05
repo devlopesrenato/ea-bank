@@ -2,7 +2,7 @@
 
 Este projeto consiste em uma API RESTful desenvolvida utilizando o framework NestJS para gerenciar contas bancárias, pagamentos e relatórios de transações, além de implementar funcionalidades de autenticação baseada em JWT e upload de imagens para Amazon S3.
 
-## Insalação e configuração do projeto
+## Instalação e configuração do projeto
 
 ## Pré-requisitos
 
@@ -23,7 +23,7 @@ POSTGRES_PASSWORD=eabankP$W
 
 - Estas variáveis serão utilizadas pelo Docker Compose para configurar o banco de dados.
 
-## 2. Suba o banco de dados PostgreSQL como Docker Compose
+## 2. Suba o banco de dados PostgreSQL com o Docker Compose
 
 - Execute o seguinte comando para construir e iniciar os serviços definidos no docker-compose.yml:
 
@@ -54,7 +54,7 @@ postgresdb    docker-entrypoint.sh postgres   Up       0.0.0.0:5432->5432/tcp
 
 ## Variáveis do Amazon S3
 
-- Adicione ao final do arquivo .env as seguinte variáveis para conexão do modulo de upload de arquivos
+- Adicione ao final do arquivo .env as seguintes variáveis para conexão do módulo de upload de arquivos
 
 ```properties
 AWS_S3_REGION=us-east-2
@@ -88,7 +88,7 @@ $ npm run start
 # desenvolvimento com modo de observação (watch mode)
 $ npm run start:dev
 
-# v
+# produçao
 $ npm run start:prod
 ```
 
