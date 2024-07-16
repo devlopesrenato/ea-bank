@@ -2,6 +2,15 @@
 
 Este projeto consiste em uma API RESTful desenvolvida utilizando o framework NestJS para gerenciar contas bancárias, pagamentos e relatórios de transações, além de implementar funcionalidades de autenticação baseada em JWT e upload de imagens para Amazon S3.
 
+## Tecnologias Utilizadas
+![NodeJS](https://img.shields.io/badge/node.js-6DA55F?style=for-the-badge&logo=node.js&logoColor=white)
+![TypeScript](https://img.shields.io/badge/typescript-%23007ACC.svg?style=for-the-badge&logo=typescript&logoColor=white)
+![NestJS](https://img.shields.io/badge/nestjs-%23E0234E.svg?style=for-the-badge&logo=nestjs&logoColor=white)
+![Prisma](https://img.shields.io/badge/Prisma-3982CE?style=for-the-badge&logo=Prisma&logoColor=white)
+![Jest](https://img.shields.io/badge/-jest-%23C21325?style=for-the-badge&logo=jest&logoColor=white)
+![Docker](https://img.shields.io/badge/docker-%230db7ed.svg?style=for-the-badge&logo=docker&logoColor=white)
+![Amazon S3](https://img.shields.io/badge/AMAZON%20S3-%23FF9900.svg?style=for-the-badge&logo=aws&logoColor=white)
+
 ## Instalação e configuração do projeto
 
 ## Pré-requisitos
